@@ -17,6 +17,7 @@
                     <h4 class="page-title pull-left">Roles</h4>
                     <ul class="breadcrumbs pull-left">
                         <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ route('role.create') }}">Crate Role</a></li>
                         <li><span>All Roles</span></li>
                     </ul>
                 </div>
@@ -41,6 +42,7 @@
                                         <th>Name</th>
                                         <th>Guard Name</th>
                                         <th>Action</th>
+                                        <th>Other</th>
 
 
                                     </tr>
@@ -52,7 +54,8 @@
                                             <td>{{ $role->name}}</td>
                                             <td>{{ $role->guard_name}}</td>
                                             <td>
-                                                -
+                                                <a href="{{ route('role.edit',$role->id) }}" class="btn btn-primary btn-xs text-white">Edit</a>
+                                                <a class="btn btn-danger btn-xs text-white">Edit</a>
                                             </td>
                                         </tr>
                                     @endforeach

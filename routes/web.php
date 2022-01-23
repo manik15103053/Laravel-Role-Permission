@@ -36,6 +36,7 @@ Route::prefix('roles')->group(function (){
     Route::get('/',[RoleController::class,'index'])->name('roles');
     Route::get('/create',[RoleController::class,'create'])->name('role.create');
     Route::post('/store',[RoleController::class,'store'])->name('role.store');
+    Route::get('/edit/{id}',[RoleController::class,'edit'])->name('role.edit');
 });
 
 
