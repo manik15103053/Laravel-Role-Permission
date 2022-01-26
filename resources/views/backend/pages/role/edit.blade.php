@@ -34,7 +34,7 @@
                     <div class="card-body">
                         <h4 class="header-title">Edit Role</h4>
                         @include('backend.layouts.partial.message')
-                        <form method="POST" action="{{ route('role.store') }}">
+                        <form method="POST" action="{{ route('role.update',$role->id) }}">
                             @csrf
                             <div class="form-group col-md-7">
                                 <label for="name">Role name</label>
@@ -43,7 +43,7 @@
                             <div class="form-group col-md-7">
                                 <label for="name">Permissions</label>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input"  id="checkPermissionAll" value="1">
+                                    <input type="checkbox" class="form-check-input"  id="checkPermissionAll" value="1" {{ App\Models\User::roleHasPermissions($role ,$permissions) ? 'checked' : ''}}>
                                     <label class="form-check-label" for="checkPermissionAll">All</label>
                                 </div>
                                 <hr>
@@ -64,7 +64,7 @@
                                         <div class="col-9 role-{{ $i }}-management-checkbox">
                                             @foreach ($permissions as $permission)
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" name="permissions[]"{{ $role->hasPermissionTo($permission->name) ? 'checked' : '' }} id="checkPermission{{ $permission->id }}" value="{{ $permission->name }}">
+                                                    <input type="checkbox" class="form-check-input" onclick="checkSinglePermission('role-{{ $i }}-management-checkbox','{{ $i }}Management',{{ count($permissions) }})" name="permissions[]"{{ $role->hasPermissionTo($permission->name) ? 'checked' : '' }} id="checkPermission{{ $permission->id }}" value="{{ $permission->name }}">
                                                     <label class="form-check-label" for="checkPermission{{ $permission->id }}">{{ $permission->name }}</label>
                                                 </div>
                                                 @php  $j++; @endphp

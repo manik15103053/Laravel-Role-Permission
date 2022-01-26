@@ -46,4 +46,21 @@ class RoleController extends Controller
 
         return view('backend.pages.role.edit',compact('permission_group','permissions','role'));
     }
+    public function update(Request $request,$id){
+        $this->validate($request,[
+
+            'name'  =>  'required|max:50',
+        ],[
+
+            'name.required' => 'Please Give a Role Name'
+        ]);
+        $role = Role::findById($id);
+        $role->name =  $request->name;
+        $role->save();
+        $permissions = $request->input('permissions');
+        if(!empty($permissions)){
+            $role->syncPermissions($permissions);
+        }
+        return redirect()->route('roles')->with('msg','Role Updated Successfully');
+    }
 }
