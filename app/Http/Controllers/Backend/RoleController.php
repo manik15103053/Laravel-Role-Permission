@@ -49,7 +49,7 @@ class RoleController extends Controller
     public function update(Request $request,$id){
         $this->validate($request,[
 
-            'name'  =>  'required|max:50',
+            'name'  =>  'required|max:50|unique:roles,name,'.$id,
         ],[
 
             'name.required' => 'Please Give a Role Name'

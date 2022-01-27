@@ -15,12 +15,21 @@
                         </ul>
                     </li>
                     <li class="{{ Route::is('roles') || Route::is('role.create') || Route::is('role.edit') || Route::is('role.show') ? 'active' : '' }}">
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-tasks"></i><span>
                                 Roles & Permission
                             </span></a>
                         <ul class="collapse {{ Route::is('roles') || Route::is('role.create') || Route::is('role.edit') || Route::is('role.show') ? 'in' : '' }}">
                             <li class="{{ Route::is('roles') ? 'active' : '' }}"><a href="{{ route('roles') }}">All Roles</a></li>
                             <li class="{{ Route::is('role.create') ||  Route::is('role.edit') ? 'active' : '' }}"><a href="{{ route('role.create') }}">Create Role</a></li>
+                        </ul>
+                    </li>
+                    <li class="{{ Route::is('users') || Route::is('user.create') || Route::is('user.edit') || Route::is('user.show') ? 'active' : '' }}">
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-user"></i><span>
+                                User
+                            </span></a>
+                        <ul class="collapse {{ Route::is('users') || Route::is('user.create') || Route::is('user.edit') || Route::is('user.show') ? 'in' : '' }}">
+                            <li class="{{ Route::is('users') ? 'active' : '' }}"><a href="{{ route('users') }}">All Roles</a></li>
+                            <li class="{{ Route::is('user.create') ||  Route::is('user.edit') ? 'active' : '' }}"><a href="{{ route('user.create') }}">Create Role</a></li>
                         </ul>
                     </li>
                 </ul>

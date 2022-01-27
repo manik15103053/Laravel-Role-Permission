@@ -12,5 +12,5 @@
     <link rel="stylesheet" href="{{ asset('admin/backend/assets') }}/css/default-css.css">
     <link rel="stylesheet" href="{{ asset('admin/backend/assets') }}/css/styles.css">
     <link rel="stylesheet" href="{{ asset('admin/backend/assets') }}/css/responsive.css">
-    <!-- modernizr css -->
-    <script src="{{ asset('admin/backend/assets') }}/js/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- modernizr css --><link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/fontawesome.css" integrity="sha384-eHoocPgXsiuZh+Yy6+7DsKAerLXyJmu2Hadh4QYyt+8v86geixVYwFqUvMU8X90l" crossorigin="anonymous"/>
+<script src="{{ asset('admin/backend/assets') }}/js/vendor/modernizr-2.8.3.min.js"></script>
