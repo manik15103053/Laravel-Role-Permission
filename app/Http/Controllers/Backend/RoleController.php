@@ -63,4 +63,8 @@ class RoleController extends Controller
         }
         return redirect()->route('roles')->with('msg','Role Updated Successfully');
     }
+    public function delete($id){
+        Role::find($id)->delete();
+        return redirect()->route('roles')->with('msg','Role Deleted Successfully');
+    }
 }

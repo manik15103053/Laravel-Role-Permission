@@ -17,7 +17,6 @@
                     <h4 class="page-title pull-left">Roles</h4>
                     <ul class="breadcrumbs pull-left">
                         <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li><a href="{{ route('role.create') }}">Crate Role</a></li>
                         <li><span>All Roles</span></li>
                     </ul>
                 </div>
@@ -32,17 +31,20 @@
             <div class="col-12 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Role List</h4>
+                        <h4 class="header-title float-left">Role List</h4>
+                        <p class="float-right mb-2">
+                            <a href="{{ route('role.create') }}" class="btn btn-info btn-xs text-white">Create new Role</a>
+                        </p>
+                        <div class="clearfix"></div>
                         @include('backend.layouts.partial.success-message')
                         <div class="data-tables">
                             <table id="dataTable" class="text-center">
                                 <thead class="bg-light text-capitalize">
                                     <tr>
-                                        <th>SI</th>
-                                        <th>Name</th>
-                                        <th>Guard Name</th>
-                                        <th>Action</th>
-                                        <th>Other</th>
+                                        <th width="5%">SI</th>
+                                        <th width="10%">Name</th>
+                                        <th width="60%">Permissions</th>
+                                        <th width="20%">Action</th>
 
 
                                     </tr>
@@ -52,10 +54,16 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $role->name}}</td>
-                                            <td>{{ $role->guard_name}}</td>
+                                            <td>
+                                               @foreach ($role->permissions as $permission)
+                                                    <span class="badge badge-info mr-1">
+                                                        {{ $permission->name }}
+                                                    </span>
+                                               @endforeach
+                                            </td>
                                             <td>
                                                 <a href="{{ route('role.edit',$role->id) }}" class="btn btn-primary btn-xs text-white">Edit</a>
-                                                <a class="btn btn-danger btn-xs text-white">Edit</a>
+                                                <a href="{{ route('role.delete',$role->id) }}" class="btn btn-danger btn-xs text-white">Edit</a>
                                             </td>
                                         </tr>
                                     @endforeach
