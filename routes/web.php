@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\Auth\LoginController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,7 +57,7 @@ Route::prefix('admins')->group(function(){
     Route::post('/login/submit',[LoginController::class,'login'])->name('admin.login.submit');
 
     //Logout Routes
-    Route::post('/logout/submit',[LoginController::class,'logout'])->name('admin.logout.submit');
+    Route::post('/logout/submit',[LoginController::class,'logout'])->name('admin.logout');
 });
 
 

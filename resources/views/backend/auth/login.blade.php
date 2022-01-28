@@ -1,7 +1,9 @@
 @extends('backend.auth.auth-master')
 
 @section('auth-content')
-    <form>
+@include('backend.layouts.partial.message')
+    <form method = "POST" action = "{{ route('admin.login.submit')}}">
+        @csrf
         <div class="login-form-head">
             <h4>Sign In</h4>
             <p>Hello there, Sign in and start managing your Admin Template</p>
