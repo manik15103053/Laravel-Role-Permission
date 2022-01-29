@@ -1,7 +1,6 @@
 @extends('backend.auth.auth-master')
 
 @section('auth-content')
-@include('backend.layouts.partial.message')
     <form method = "POST" action = "{{ route('admin.login.submit')}}">
         @csrf
         <div class="login-form-head">
@@ -9,9 +8,10 @@
             <p>Hello there, Sign in and start managing your Admin Template</p>
         </div>
         <div class="login-form-body">
+        @include('backend.layouts.partial.message')
             <div class="form-gp">
                 <label for="email">Email address</label>
-                <input type="email" id="email" name="email">
+                <input type="text" id="email" name="email">
                 <i class="ti-email"></i>
                 <div class="text-danger"></div>
                 @error('email')

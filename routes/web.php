@@ -57,7 +57,7 @@ Route::prefix('admins')->group(function(){
     Route::post('/login/submit',[LoginController::class,'login'])->name('admin.login.submit');
 
     //Logout Routes
-    Route::post('/logout/submit',[LoginController::class,'logout'])->name('admin.logout');
+    Route::get('/logout/submit',[LoginController::class,'logout'])->name('admin.logout');
 });
 
 
