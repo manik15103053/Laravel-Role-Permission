@@ -1,6 +1,6 @@
 @extends('backend.layouts.master');
 @section('title')
-    User
+    Admin
 @endsection
 @section('styles')
         <!-- Start datatable css -->
@@ -31,9 +31,9 @@
             <div class="col-12 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title float-left">User List</h4>
+                        <h4 class="header-title float-left">admin List</h4>
                         <p class="float-right mb-2">
-                            <a href="{{ route('user.create') }}" class="btn btn-info btn-xs text-white">Create new User</a>
+                            <a href="{{ route('admin.create') }}" class="btn btn-info btn-xs text-white">Create new Admin</a>
                         </p>
                         <div class="clearfix"></div>
                         @include('backend.layouts.partial.success-message')
@@ -49,21 +49,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($users as $key=>$user)
+                                    @foreach($admins as $key=>$admin)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $user->name}}</td>
-                                            <td>{{ $user->email}}</td>
+                                            <td>{{ $admin->name}}</td>
+                                            <td>{{ $admin->email}}</td>
                                             <td>
-                                               @foreach ($user->roles as $role)
+                                               @foreach ($admin->roles as $role)
                                                     <span class="badge badge-info mr-1">
                                                         {{ $role->name }}
                                                     </span>
                                                @endforeach
                                             </td>
                                             <td>
-                                                <a href="{{ route('user.edit',$user->id) }}" class="btn btn-primary btn-xs text-white">Edit</a>
-                                                <a href="{{ route('user.delete',$user->id) }}" class="btn btn-danger btn-xs text-white">Delete</a>
+                                                <a href="{{ route('admin.edit',$admin->id) }}" class="btn btn-primary btn-xs text-white">Edit</a>
+                                                <a href="{{ route('admin.delete',$admin->id) }}" class="btn btn-danger btn-xs text-white">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach

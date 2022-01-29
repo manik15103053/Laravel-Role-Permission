@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\BackendController;
-use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\Auth\LoginController;
 
 
@@ -44,13 +44,13 @@ Route::prefix('admins')->group(function(){
         Route::post('/update/{id}',[RoleController::class,'update'])->name('role.update');
         Route::get('/delete/{id}',[RoleController::class,'delete'])->name('role.delete');
     });
-    Route::prefix('users')->group(function(){
-        Route::get('/',[UserController::class,'index'])->name('users');
-        Route::get('/create',[UserController::class,'create'])->name('user.create');
-        Route::post('/store',[UserController::class,'store'])->name('user.store');
-        Route::get('/edit{id}',[UserController::class,'edit'])->name('user.edit');
-        Route::post('/update/{id}',[UserController::class,'update'])->name('user.update');
-        Route::get('/delete/{id}',[UserController::class,'delete'])->name('user.delete');
+    Route::prefix('admins')->group(function(){
+        Route::get('/',[AdminController::class,'index'])->name('admins');
+        Route::get('/create',[AdminController::class,'create'])->name('admin.create');
+        Route::post('/store',[AdminController::class,'store'])->name('admin.store');
+        Route::get('/edit{id}',[AdminController::class,'edit'])->name('admin.edit');
+        Route::post('/update/{id}',[AdminController::class,'update'])->name('admin.update');
+        Route::get('/delete/{id}',[AdminController::class,'delete'])->name('admin.delete');
     });
     //login Routes
     Route::get('/login',[LoginController::class,'showLoginForm'])->name('admin.login');

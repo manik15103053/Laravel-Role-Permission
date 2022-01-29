@@ -75,7 +75,7 @@ class LoginController extends Controller
 
     /**
      * logout admin guard
-   
+
      * logout admin guard
      *
      * @return void

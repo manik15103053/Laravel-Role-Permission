@@ -1,4 +1,7 @@
 @extends('backend.layouts.master');
+@php
+    $user = Auth::guard('admin')->user();
+@endphp
 @section('title')
     Admin Role
 @endsection
@@ -32,9 +35,11 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title float-left">Role List</h4>
-                        <p class="float-right mb-2">
-                            <a href="{{ route('role.create') }}" class="btn btn-info btn-xs text-white">Create new Role</a>
-                        </p>
+                        @if ($user->can('admin.create'))
+                            <p class="float-right mb-2">
+                                <a href="{{ route('role.create') }}" class="btn btn-info btn-xs text-white">Create new Role</a>
+                            </p>
+                        @endif
                         <div class="clearfix"></div>
                         @include('backend.layouts.partial.success-message')
                         <div class="data-tables">
@@ -44,7 +49,9 @@
                                         <th width="5%">SI</th>
                                         <th width="10%">Name</th>
                                         <th width="60%">Permissions</th>
-                                        <th width="20%">Action</th>
+                                        @if ($user->can('admin.edit') || $user->can('admin.delete'))
+                                            <th width="20%">Action</th>
+                                        @endif
 
 
                                     </tr>
@@ -62,8 +69,12 @@
                                                @endforeach
                                             </td>
                                             <td>
-                                                <a href="{{ route('role.edit',$role->id) }}" class="btn btn-primary btn-xs text-white">Edit</a>
-                                                <a href="{{ route('role.delete',$role->id) }}" class="btn btn-danger btn-xs text-white">Edit</a>
+                                                @if ($user->can('admin.edit'))
+                                                    <a href="{{ route('role.edit',$role->id) }}" class="btn btn-primary btn-xs text-white">Edit</a>
+                                                @endif
+                                                @if ($user->can('admin.delete'))
+                                                        <a href="{{ route('role.delete',$role->id) }}" class="btn btn-danger btn-xs text-white">Delete</a>
+                                                    @endif
                                             </td>
                                         </tr>
                                     @endforeach

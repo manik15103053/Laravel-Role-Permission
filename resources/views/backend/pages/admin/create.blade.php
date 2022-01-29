@@ -1,6 +1,6 @@
 @extends('backend.layouts.master');
 @section('title')
-   User Edit
+    Admin Role Create
 @endsection
 @section('styles')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -13,7 +13,7 @@
                     <h4 class="page-title pull-left">Roles</h4>
                     <ul class="breadcrumbs pull-left">
                         <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li><a href="{{ route('users') }}">All User</a></li>
+                        <li><a href="{{ route('admins') }}">All Admin</a></li>
                         <li><span>Create Role</span></li>
                     </ul>
                 </div>
@@ -28,18 +28,18 @@
             <div class="col-12  mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Create Edit Role</h4>
+                        <h4 class="header-title">Create New Role</h4>
                         @include('backend.layouts.partial.message')
-                        <form method="POST" action="{{ route('user.update',$user->id) }}">
+                        <form method="POST" action="{{ route('admin.store') }}">
                             @csrf
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="name">Name</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="{{ $user->name }}">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="email">Email</label>
-                                    <input type="text" class="form-control" id="email" name="email" placeholder="Enter Your Email" value="{{ $user->email }}">
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="Enter Your Email">
                                 </div>
                             </div>
                             <div class="row">
@@ -54,10 +54,14 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter Your Username">
+                                </div>
+                                <div class="form-group col-md-6">
                                     <label>Assign Roles</label>
                                     <select id="roles" name="roles[]" class="form-control select2" multiple>
                                         @foreach($roles as $role)
-                                            <option value="{{ $role->name }}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>{{ $role->name }}</option>
+                                            <option value="{{ $role->name }}">{{ $role->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
