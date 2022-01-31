@@ -5,6 +5,8 @@ use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\Auth\LoginController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\PostController;
 
 
 /*
@@ -18,19 +20,20 @@ use App\Http\Controllers\Backend\Auth\LoginController;
 |
 */
 
- Route::get('/', function () {
-     return view('welcome');
- });
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Auth::routes();
+//Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'redirectAdmin'])->name('index');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
+//Auth::routes();
+//
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//
+//Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //Role Permission Route
@@ -58,6 +61,22 @@ Route::prefix('admins')->group(function(){
 
     //Logout Routes
     Route::get('/logout/submit',[LoginController::class,'logout'])->name('admin.logout');
+    Route::prefix('category')->group(function(){
+        Route::get('/',[CategoryController::class,'index'])->name('categories');
+        Route::get('/create',[CategoryController::class,'create'])->name('create.category');
+        Route::post('/store',[CategoryController::class,'store'])->name('category.store');
+        Route::get('/edit/{id}',[CategoryController::class,'edit'])->name('category.edit');
+        Route::post('/update/{id}',[CategoryController::class,'update'])->name('category.update');
+        Route::get('/delete/{id}',[CategoryController::class,'delete'])->name('category.delete');
+    });
+    Route::prefix('post')->group(function(){
+        Route::get('/',[PostController::class,'index'])->name('posts');
+        Route::get('/create',[PostController::class,'create'])->name('post.create');
+        Route::post('/store',[PostController::class,'store'])->name('post.store');
+        Route::get('/edit/{id}',[PostController::class,'edit'])->name('post.edit');
+        Route::post('/update/{id}',[PostController::class,'update'])->name('post.update');
+        Route::get('/delete/{id}',[PostController::class,'delete'])->name('post.delete');
+    });
 });
 
 
