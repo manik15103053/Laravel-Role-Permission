@@ -65,6 +65,7 @@ Route::prefix('admins')->group(function(){
         Route::get('/',[CategoryController::class,'index'])->name('categories');
         Route::get('/create',[CategoryController::class,'create'])->name('create.category');
         Route::post('/store',[CategoryController::class,'store'])->name('category.store');
+        Route::get('/category-by-post/{id}',[CategoryController::class,'show'])->name('category.show');
         Route::get('/edit/{id}',[CategoryController::class,'edit'])->name('category.edit');
         Route::post('/update/{id}',[CategoryController::class,'update'])->name('category.update');
         Route::get('/delete/{id}',[CategoryController::class,'delete'])->name('category.delete');

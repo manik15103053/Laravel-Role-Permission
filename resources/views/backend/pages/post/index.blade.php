@@ -47,7 +47,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($posts as $key=>$post)
+                                    @foreach($users->posts as $key=>$post)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $post->name}}</td>
@@ -72,6 +72,7 @@
                     <div class="card-body">
                         <h4 class="header-title float-left">Add Category</h4>
                         <div class="clearfix"></div>
+                        @include('backend.layouts.partial.message')
                         <form method="POST" action="{{ route('post.store') }}">
                             @csrf
                             <div class="form-group">

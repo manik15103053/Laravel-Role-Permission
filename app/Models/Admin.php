@@ -62,4 +62,7 @@ class Admin extends Authenticatable
         }
         return $hasPermission;
     }
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
 }

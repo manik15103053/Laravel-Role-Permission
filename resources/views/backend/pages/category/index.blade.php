@@ -55,6 +55,7 @@
 
                                             <td>
                                                 <a href="{{ route('category.edit',$category->id) }}" class="btn btn-primary btn-xs text-white">Edit</a>
+                                                <a href="{{ route('category.show',$category->id) }}" class="btn btn-success btn-xs text-white">view</a>
                                                 <a href="{{ route('category.delete',$category->id) }}" class="btn btn-danger btn-xs text-white">Delete</a>
                                             </td>
                                         </tr>
@@ -70,6 +71,7 @@
                     <div class="card-body">
                         <h4 class="header-title float-left">Add Category</h4>
                         <div class="clearfix"></div>
+                        @include('backend.layouts.partial.message')
                         <form method="POST" action="{{ route('category.store') }}">
                             @csrf
                             <div class="form-group">

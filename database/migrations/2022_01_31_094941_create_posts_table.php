@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->text('description');
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('admin_id')->nullable();
             $table->timestamps();
         });
     }

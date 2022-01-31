@@ -29,6 +29,11 @@ class CategoryController extends Controller
         $category = Category::find($id);
         return view('backend.pages.category.edit',compact('category'));
     }
+    public function show($id){
+        $category = Category::find($id);
+        return view('backend.pages.category.show',compact('category'));
+
+    }
     public function update(Request $request,$id){
         $request->validate([
             'name'  => 'required|max:50'

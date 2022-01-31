@@ -7,6 +7,8 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\PostNotification;
+use Illuminate\Support\Facades\Auth;
 
 
 class PostController extends Controller
@@ -15,8 +17,11 @@ class PostController extends Controller
 
     public function index(){
         $categories = Category::all();
-        $posts = Post::all();
-        return view('backend.pages.post.index',compact('categories','posts'));
+        $users = Auth::guard('admin')->user();
+
+
+        // $posts = Post::all();
+        return view('backend.pages.post.index',compact('categories','users'));
     }
     public function create(){
         return view('backend.pages.post.create');
@@ -25,15 +30,18 @@ class PostController extends Controller
         $request->validate([
             'name'  => 'required|max:60',
             'slug'         => 'unique:posts,slug|max:60',
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'description'  => 'required|nullable'
         ]);
         $post = new Post();
         $post->name = $request->name;
         $post->slug = Str::slug($request->slug);
         $post->description  = $request->description;
         $post->category_id   = $request->category_id;
-        $post->user_id       = $request->user_id;
+        $post->admin_id       = Auth::guard('admin')->user()->id;
         $post->save();
+
+        $post->notify(new PostNotification($post));
         return back()->with('msg','Post Created Successfully');
     }
 
