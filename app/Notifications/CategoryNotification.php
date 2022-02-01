@@ -2,25 +2,23 @@
 
 namespace App\Notifications;
 
-use App\Models\Post;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PostNotification extends Notification implements ShouldQueue
+class CategoryNotification extends Notification implements ShouldQueue
 {
     use Queueable;
-    private $post;
-
+    private $category;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($post)
+    public function __construct($category)
     {
-        $this->post = $post;
+        $this->category = $category;
     }
 
     /**
@@ -43,9 +41,9 @@ class PostNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('Hi There! ' .$this->post->name)
-                    ->line('Your Post has been created Successfully!')
-                    ->action('Check Your Post', route('posts',$this->post->id))
+                    ->line('Hello ' .$this->category->name)
+                    ->line('Category successfully has been created')
+                    ->action('check notification', route('categories',$this->category->name))
                     ->line('Thank you for using our application!');
     }
 

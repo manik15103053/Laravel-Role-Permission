@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Notifications\CategoryNotification;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -23,6 +24,10 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->description = $request->description;
         $category->save();
+
+        //Notification
+        $category->notify(new CategoryNotification($category));
+
         return back()->with('msg','Category Created Successfully');
     }
     public function edit($id){

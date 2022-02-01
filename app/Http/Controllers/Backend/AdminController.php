@@ -55,6 +55,7 @@ class AdminController extends Controller
             $admin->assignRole($request->roles);
         }
         $admin->notify(new VerifyNotification($admin));
+
         return redirect()->route('admins')->with('msg','Admin Created Successfully');
 
     }

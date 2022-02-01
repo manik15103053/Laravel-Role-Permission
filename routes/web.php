@@ -76,6 +76,7 @@ Route::prefix('admins')->group(function(){
         Route::post('/store',[PostController::class,'store'])->name('post.store');
         Route::get('/edit/{id}',[PostController::class,'edit'])->name('post.edit');
         Route::post('/update/{id}',[PostController::class,'update'])->name('post.update');
+        Route::get('/status-change/{id}',[PostController::class,'statusChange'])->name('post.status-change');
         Route::get('/delete/{id}',[PostController::class,'delete'])->name('post.delete');
     });
 });

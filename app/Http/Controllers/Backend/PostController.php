@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Admin;
 use App\Models\Post;
 use App\Models\Category;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -40,9 +42,19 @@ class PostController extends Controller
         $post->category_id   = $request->category_id;
         $post->admin_id       = Auth::guard('admin')->user()->id;
         $post->save();
-
         $post->notify(new PostNotification($post));
-        return back()->with('msg','Post Created Successfully');
+        return back()->with('msg','Post Created successfully');
+//
+    }
+    public function statusChange($id){
+        $getStatus = Post::select('status')->where('id',$id)->first();
+        if ($getStatus->status == 1) {
+            $status = 0;
+        }else{
+            $status  = 1;
+        }
+        Post::where('id',$id)->update(['status' => $status]);
+        return back()->with('msg','Status Successfully Change');
     }
 
 }

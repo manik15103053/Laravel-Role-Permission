@@ -42,6 +42,7 @@
                                         <th style="width: 10%">Post</th>
                                         <th style="width: 10%">Category</th>
                                         <th style="width: 10%">Description</th>
+                                        <th style="width: 10%">Status</th>
                                         <th style="width: 10%">Created At</th>
                                         <th style="width: 15%">Action</th>
                                     </tr>
@@ -53,6 +54,7 @@
                                             <td>{{ $post->name}}</td>
                                             <td>{{ $post->category->name}}</td>
                                             <td>{{ $post->description}}</td>
+                                            <td class = "text-color {{ $post->status == 0 ? 'Red' : 'Green' }}">{{ $post->status == 0 ? 'Inactive' :  'Active'}}</td>
                                             <td>{{ $post->created_at}}</td>
 
                                             <td>
