@@ -57,7 +57,7 @@
                             </span></a>
                         <ul class="collapse {{ Route::is('admins') || Route::is('admin.create') || Route::is('admin.edit') || Route::is('admin.show') ? 'in' : '' }}">
                             {{--                                @if ($user->can('admin.view'))--}}
-                            <li class="{{ Route::is('admins') ? 'active' : '' }}"><a href="{{ route('categories') }}">All Admin</a></li>
+                            <li class="{{ Route::is('admins') ? 'active' : '' }}"><a href="{{ route('categories') }}">All Category</a></li>
                             {{--                                @endif--}}
                             {{--                                @if ($user->can('admin.create'))--}}
                             {{--                                    @endif--}}
@@ -70,6 +70,7 @@
                         <ul class="collapse {{ Route::is('posts') || Route::is('admin.create') || Route::is('admin.edit') || Route::is('admin.show') ? 'in' : '' }}">
                             {{--                                @if ($user->can('admin.view'))--}}
                             <li class="{{ Route::is('posts') ? 'active' : '' }}"><a href="{{ route('posts') }}">All Post</a></li>
+                            <li class="{{ Route::is('post.create') ? 'active' : '' }}"><a href="{{ route('post.create') }}">Create Post</a></li>
                             {{--                                @endif--}}
                             {{--                                @if ($user->can('admin.create'))--}}
                             {{--                                    @endif--}}

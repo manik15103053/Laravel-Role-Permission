@@ -28,98 +28,66 @@
     <div class="main-content-inner">
         <div class="row">
             <!-- data table start -->
-            <div class="col-7 mt-5">
+            <div class="col-12 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title float-left">Category List</h4>
+                        <h4 class="header-title float-left">Post List</h4>
+                        <p class="float-right mb-2">
+                            <a href="{{ route('post.create') }}" class="btn btn-info btn-xs text-white">Create new Post</a>
+                        </p>
                         @include('backend.layouts.partial.success-message')
                         <div class="clearfix"></div>
-                        <div class="data-tables">
-                            <table id="dataTable" class="text-center">
-                                <thead class="bg-light text-capitalize">
-                                    <tr>
-                                        <th style="width: 5%">Sl</th>
-                                        <th style="width: 10%">Post</th>
-                                        <th style="width: 10%">Category</th>
-                                        <th style="width: 10%">Description</th>
-                                        <th style="width: 10%">Status</th>
-                                        <th style="width: 10%">Created At</th>
-                                        <th style="width: 15%">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($users->posts as $key=>$post)
+                        <div class="single-table">
+                            <div class="table-responsive">
+                                <table class="table text-center">
+                                    <thead class="text-uppercase bg-success">
+                                        <tr class="text-white">
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Post</th>
+                                            <th scope="col">Category</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Created At</th>
+                                            <th scope="col">action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($users->posts as $key=>$post)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $post->name}}</td>
                                             <td>{{ $post->category->name}}</td>
                                             <td>{{ $post->description}}</td>
-                                            <td class = "text-color {{ $post->status == 0 ? 'Red' : 'Green' }}">{{ $post->status == 0 ? 'Inactive' :  'Active'}}</td>
+                                            <td>
+                                                @if ($post->status == true)
+                                                    <span style="background-color: green; color:wheat">Active</span>
+                                                 @else
+                                                    <span style="background-color: red; color:wheat">Inactive</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $post->created_at}}</td>
 
                                             <td>
-                                                <a href="{{ route('post.edit',$post->id) }}" class="btn btn-primary btn-xs text-white">Edit</a>
-                                                <a href="{{ route('post.delete',$post->id) }}" class="btn btn-danger btn-xs text-white">Delete</a>
+                                                <a href="" class="btn btn-outline-info btn-xs">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <a href="{{ route('post.status-change',$post->id) }}" class="btn btn-outline-success btn-xs">
+                                                    <i class="{{ $post->status == true ? 'fa fa-ban' : 'fa fa-check' }}"></i>
+                                                </a>
+                                                <a href="" class="btn btn-outline-danger btn-xs">
+                                                    <i class="fa fa-trash "></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-5 mt-5">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="header-title float-left">Add Category</h4>
-                        <div class="clearfix"></div>
-                        @include('backend.layouts.partial.message')
-                        <form method="POST" action="{{ route('post.store') }}">
-                            @csrf
-                            <div class="form-group">
-                                <label for="name">Post Name</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Category Name">
-                            </div>
-                            <div class="form-group">
-                                <label for="slug">Slug</label>
-                                <input type="text" class="form-control" id="slug" name="slug" placeholder="Enter Slug">
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Category</label>
-                                <select name="category_id" id="category_id" class="form-control">
-                                    <option>Select Category</option>
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea name="description" id="description" cols="3" rows="" class="form-control"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-info btn-sm float-right">Save</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     @endsection
-    @section('scripts')
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
-    <script>
-         // datatable active
-    if ($('#dataTable').length) {
-        $('#dataTable').DataTable({
-            responsive: true
-        });
-    }
-    </script>
-    @endsection
+

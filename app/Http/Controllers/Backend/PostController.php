@@ -18,15 +18,16 @@ class PostController extends Controller
 
 
     public function index(){
-        $categories = Category::all();
+
         $users = Auth::guard('admin')->user();
 
 
         // $posts = Post::all();
-        return view('backend.pages.post.index',compact('categories','users'));
+        return view('backend.pages.post.index',compact('users'));
     }
     public function create(){
-        return view('backend.pages.post.create');
+        $categories = Category::all();
+        return view('backend.pages.post.create',compact('categories'));
     }
     public function store(Request $request){
         $request->validate([
@@ -43,7 +44,7 @@ class PostController extends Controller
         $post->admin_id       = Auth::guard('admin')->user()->id;
         $post->save();
         $post->notify(new PostNotification($post));
-        return back()->with('msg','Post Created successfully');
+        return redirect()->route('posts')->with('msg','Post Created successfully');
 //
     }
     public function statusChange($id){
